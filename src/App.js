@@ -1,47 +1,28 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 
-function Food({name, picture, rating}){
-  return (
-    <div>
-      <h3>I love {name}</h3>
-      <h4>{rating}/5.0</h4>
-      <img src={picture} alt=""/>
-    </div>
-  );
-}
+class App extends React.Component {
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  picture: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-}
+  state = {
+    count: 0
+  };
 
-const foodILike = [
-  {
-    'id': 1,
-    'name': 'Borsche',
-    'image': 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fprimebeef.ru%2Fimages%2Fcms%2Fdata%2F3-501.jpg&f=1&nofb=1',
-    'rating': 4.5,
-  },
-  {
-    'id': 2,
-    'name': 'Shaurma',
-    'image': 'https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fprimebeef.ru%2Fimages%2Fcms%2Fdata%2F3-501.jpg&f=1&nofb=1',
-    'rating': 4.6,
-  },
-]
+  add = () => {
+    this.setState(current => ({count: current.count + 1}));
+  }
 
-function renderFood(dish){
-  return <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating} />
-}
+  minus = () => {
+    this.setState(current => ({count: current.count - 1}));
+  }
 
-function App() {
-  return (
-    <div>
-      {console.log(foodILike.map(renderFood))}
-      {foodILike.map(renderFood)}
-    </div>
-  );
+  render(){
+    return <div>
+     <h1>Current number: {this.state.count}</h1>
+     <button onClick={this.add}>Plus</button>
+     <button onClick={this.minus}>Minus</button>
+     </div>
+
+  }
 }
 
 export default App;
